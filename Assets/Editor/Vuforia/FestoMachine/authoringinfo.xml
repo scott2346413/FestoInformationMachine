@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<QCARInfo>
+    <TargetSet version="3.4">
+        <AreaTarget version="5.2" bbox="-9.0540 -0.8049 -1.4629 -1.3340 1.4155 7.3296" area="36" targetId="a466bf109da74b08a2b9c11813d603d8" name="FestoMachine" pathAuthoring="a466bf109da74b08a2b9c11813d603d8_authoring.glb" pathOcclusion="a466bf109da74b08a2b9c11813d603d8_occlusion.3dt" pathNavMesh="a466bf109da74b08a2b9c11813d603d8_navmesh.glb" cloudTarget="false" />
+    </TargetSet>
+</QCARInfo>
