@@ -16,9 +16,9 @@ public class InformationHandler : MonoBehaviour
     public MachineInformation[] machineInformation;
 
     Dictionary<string, Transform> components = new Dictionary<string, Transform>();
-    List<(String, Transform)> objectsToSpawn = new List<(String, Transform)>(); // string: component key. transform: target transform
-    List<(String, Transform)> objectsToMove = new List<(String, Transform)>(); // string: component key. transform: new transform
+
     List<RFIDInData> RFIDInDatas = new List<RFIDInData>();
+    List<EmgStopData> emgStopDatas = new List<EmgStopData>();
 
     public void updateInformation(int interfaceToRead, string node, object data)
     {
@@ -56,12 +56,17 @@ public class InformationHandler : MonoBehaviour
     {
         string stopped = "stopped";
 
-        if (!Convert.ToBoolean(data))
+        if (Convert.ToBoolean(data))
         {
             stopped = "unstopped";
         }
 
         Debug.Log("component " + interfaceToRead + " has been " + stopped);
+
+        EmgStopData emgStopData = new EmgStopData();
+        emgStopData.pressed = !Convert.ToBoolean(data);
+        emgStopData.interfaceToRead = interfaceToRead;
+        emgStopDatas.Add(emgStopData);
     }
 
     private void Update()
@@ -99,6 +104,17 @@ public class InformationHandler : MonoBehaviour
 
             Debug.Log("moving or spawning object: " + data.ToString());
             Debug.Log("new component: " + RFIDInData.newComponent);
+            Debug.Log("-----");
+        }
+
+        if(emgStopDatas.Count > 0)
+        {
+            EmgStopData emgStopData = emgStopDatas[0];
+            machineInformation[emgStopData.interfaceToRead - 1].EmgStopPressed(emgStopData.pressed);
+            emgStopDatas.RemoveAt(0);
+
+            Debug.Log("emergency stop: " + emgStopData.pressed);
+            Debug.Log("interface: " + emgStopData.interfaceToRead);
             Debug.Log("-----");
         }
     }
