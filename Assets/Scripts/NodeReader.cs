@@ -14,10 +14,13 @@ public class NodeReader : MonoBehaviour
     public string nodeID;
     public string dataFromOPCUANode;
 
+    InformationHandler infoHandler;
 
     // Subscribe to OPC UA events on start
     void Start()
     {
+        infoHandler = FindAnyObjectByType<InformationHandler>();
+
         oPCUAInterface.EventOnConnected.AddListener(OnInterfaceConnected);
         oPCUAInterface.EventOnDisconnected.AddListener(OnInterfaceDisconnected);
     }
@@ -43,6 +46,6 @@ public class NodeReader : MonoBehaviour
     public void NodeChanged(OPCUANodeSubscription sub, object value)
     {
         dataFromOPCUANode = value.ToString();
-        Debug.Log(dataFromOPCUANode);
+        infoHandler.updateInformation(factoryMachineID, nodeBeingMonitored, dataFromOPCUANode);
     }
 }
