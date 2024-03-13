@@ -8,7 +8,7 @@ public class StartUIManager : MonoBehaviour
     public GameObject DT;
     public GameObject UI;
 
-    private void Start()
+    private void Awake()
     {
         AR.SetActive(false);
         DT.SetActive(false);

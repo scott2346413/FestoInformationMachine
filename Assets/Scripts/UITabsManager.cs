@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class UITabsManager : MonoBehaviour
 {
+    public RectTransform buttons;
     public RectTransform[] tabs;
+    float buttonsStartX;
+    bool buttonOpen;
     float[] startingX;
     bool[] open;
 
     private void Start()
     {
+        buttonsStartX = buttons.position.x;
+
         startingX = new float[tabs.Length];
         open = new bool[tabs.Length];
 
@@ -25,18 +30,26 @@ public class UITabsManager : MonoBehaviour
     {
         bool opened = open[tab];
 
+        if (opened)
+        {
+            buttons.DOMoveX(buttonsStartX, 1f);
+        }
+        else if (!buttonOpen)
+        {
+            buttons.DOMoveX(buttonsStartX + 300, 1f);
+        }
+
         for (int tabIndex = 0; tabIndex < tabs.Length; tabIndex++)
         {
             if (tabIndex == tab && !opened)
             {
-                Debug.Log("OPEN");
                 open[tabIndex] = true;
-                tabs[tabIndex].DOMoveX(startingX[tab] + 300, 1);
+                tabs[tabIndex].DOMoveX(startingX[tab] + 300, 1f);
             }
             else
             {
                 open[tabIndex] = false;
-                tabs[tabIndex].DOMoveX(startingX[tab] + 0, 1f);
+                tabs[tabIndex].DOMoveX(startingX[tab], 1f);
             }
         }
     }

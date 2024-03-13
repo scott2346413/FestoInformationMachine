@@ -37,9 +37,6 @@ public class InformationHandler : MonoBehaviour
     void RFIDIn(int interfaceToRead, object data)
     {
         RFIDInData currentRFIDIn = new RFIDInData();
-
-        Debug.Log("component: " + data.ToString() + " has passed machine " + interfaceToRead);
-
         Transform target = machineTransforms[interfaceToRead - 1];
         bool newComponent = !components.ContainsKey(data.ToString());
 
@@ -54,15 +51,6 @@ public class InformationHandler : MonoBehaviour
 
     void EmergencyStop(int interfaceToRead, object data)
     {
-        string stopped = "stopped";
-
-        if (Convert.ToBoolean(data))
-        {
-            stopped = "unstopped";
-        }
-
-        Debug.Log("component " + interfaceToRead + " has been " + stopped);
-
         EmgStopData emgStopData = new EmgStopData();
         emgStopData.pressed = !Convert.ToBoolean(data);
         emgStopData.interfaceToRead = interfaceToRead;
@@ -101,10 +89,6 @@ public class InformationHandler : MonoBehaviour
             comManager.updateText(componentKey);
 
             RFIDInDatas.RemoveAt(0);
-
-            Debug.Log("moving or spawning object: " + data.ToString());
-            Debug.Log("new component: " + RFIDInData.newComponent);
-            Debug.Log("-----");
         }
 
         if(emgStopDatas.Count > 0)
@@ -112,10 +96,6 @@ public class InformationHandler : MonoBehaviour
             EmgStopData emgStopData = emgStopDatas[0];
             machineInformation[emgStopData.interfaceToRead - 1].EmgStopPressed(emgStopData.pressed);
             emgStopDatas.RemoveAt(0);
-
-            Debug.Log("emergency stop: " + emgStopData.pressed);
-            Debug.Log("interface: " + emgStopData.interfaceToRead);
-            Debug.Log("-----");
         }
     }
 }

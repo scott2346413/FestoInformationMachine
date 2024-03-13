@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RFIDInData
+public class RFIDInData : MonoBehaviour
 {
     public object data;
     public bool newComponent;
@@ -11,9 +11,9 @@ public class RFIDInData
 
     public void Create(object _data, bool _newComponent, Transform _target, int _interfaceToRead)
     {
-        this.data = _data;
-        this.newComponent = _newComponent;
-        this.target = _target;
-        this.interfaceToRead = _interfaceToRead;
+        data = _data;
+        newComponent = _newComponent;
+        target = _target;
+        interfaceToRead = _interfaceToRead;
     }
 }
