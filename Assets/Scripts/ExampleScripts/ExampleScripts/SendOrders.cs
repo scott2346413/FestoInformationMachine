@@ -11,7 +11,7 @@ using UnityEngine;
 /// The OrderCompleteNewPhone method is an example of how you could use it, e.g., calling it from a UI button.
 /// <summary> 
 
-public class SendOrder : MonoBehaviour
+public class SendOrders : MonoBehaviour
 {
     #region private members 	
     private TcpClient socketConnection;

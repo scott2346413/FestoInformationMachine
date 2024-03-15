@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class OrdersManager : MonoBehaviour
 {
-    public SendOrder sendOrder;
+    public SendOrders sendOrder;
     public CurrentOrders currentOrders;
 
     public Transform ordersParent;
