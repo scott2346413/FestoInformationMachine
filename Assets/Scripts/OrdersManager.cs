@@ -10,17 +10,13 @@ public class OrdersManager : MonoBehaviour
     public CurrentOrders currentOrders;
 
     public Transform ordersParent;
-    public Transform ordersSlidingParent;
     public GameObject orderInfo;
-
-    public Scrollbar scrollbar;
 
     float slidingParentStartY;
 
     private void Start()
     {
         Refresh();
-        slidingParentStartY = ordersSlidingParent.transform.position.y;
     }
 
     public void SendOrder()
@@ -35,10 +31,7 @@ public class OrdersManager : MonoBehaviour
     public void Refresh()
     {
         currentOrders.GetCurrentOrders();
-    }
 
-    private void Update()
-    {
         foreach (Transform t in ordersParent.GetComponentsInChildren<Transform>())
         {
             if (t != ordersParent)
@@ -51,11 +44,5 @@ public class OrdersManager : MonoBehaviour
         {
             Instantiate(orderInfo, ordersParent).GetComponentInChildren<TextMeshProUGUI>().text = orderInfoText;
         }
-    }
-
-    public void updateSlide()
-    {
-        float maxY = 320 * ordersParent.childCount - 286;
-        ordersParent.transform.position = new Vector3(ordersSlidingParent.position.x, slidingParentStartY + scrollbar.value * maxY, ordersSlidingParent.position.z);
     }
 }

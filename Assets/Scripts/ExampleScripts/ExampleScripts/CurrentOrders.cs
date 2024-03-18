@@ -84,7 +84,7 @@ public class CurrentOrders : MonoBehaviour
                     Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
                     // Process received data
                     ReceieveData(webRequest.downloadHandler.text);
-                    Debug.LogError("Current Orders Success");
+                    Debug.Log("Current Orders Success");
                     break;
             }
         }

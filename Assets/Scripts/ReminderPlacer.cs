@@ -13,16 +13,9 @@ public class ReminderPlacer : MonoBehaviour
     public TMP_InputField textInput;
     public TMP_Dropdown dropdown;
 
-    public GameObject newReminderObject;
     public GameObject textInputObject;
 
     Transform currentReminder;
-
-    public void newReminder()
-    {
-        newReminderObject.SetActive(false);
-        textInputObject.SetActive(true);
-    }
 
     public void createReminder()
     {
@@ -36,9 +29,6 @@ public class ReminderPlacer : MonoBehaviour
         }
 
         textInput.text = "";
-
-        textInputObject.SetActive(false);
-        newReminderObject.SetActive(true);
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(machine);
 
