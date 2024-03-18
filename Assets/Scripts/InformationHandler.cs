@@ -17,8 +17,11 @@ public class InformationHandler : MonoBehaviour
 
     Dictionary<string, Transform> components = new Dictionary<string, Transform>();
 
+    public Animator Robot;
+
     List<RFIDInData> RFIDInDatas = new List<RFIDInData>();
     List<EmgStopData> emgStopDatas = new List<EmgStopData>();
+    List<bool> roboBusyDatas = new List<bool>();
 
     public void updateInformation(int interfaceToRead, string node, object data)
     {
@@ -31,6 +34,10 @@ public class InformationHandler : MonoBehaviour
             case "EmgStop":
                 EmergencyStop(interfaceToRead, data);
                 break;
+
+            case "RobotBusy":
+                RobotBusy(data);
+                break;
         }
     }
 
@@ -40,7 +47,7 @@ public class InformationHandler : MonoBehaviour
         Transform target = machineTransforms[interfaceToRead - 1];
         bool newComponent = !components.ContainsKey(data.ToString());
 
-        if(newComponent)
+        if (newComponent)
         {
             components.Add(data.ToString(), null);
         }
@@ -57,15 +64,21 @@ public class InformationHandler : MonoBehaviour
         emgStopDatas.Add(emgStopData);
     }
 
+    void RobotBusy(object data)
+    {
+        bool busy = (bool)data;
+        roboBusyDatas.Add(busy);
+    }
+
     private void Update()
     {
-        if(RFIDInDatas.Count > 0)
+        if (RFIDInDatas.Count > 0)
         {
 
             RFIDInData RFIDInData = RFIDInDatas[0];
             object data = RFIDInData.data;
 
-            machineInformation[RFIDInData.interfaceToRead-1].PanelPassed(data.ToString());
+            machineInformation[RFIDInData.interfaceToRead - 1].PanelPassed(data.ToString());
 
             string componentKey = data.ToString();
             Transform target = RFIDInData.target;
@@ -91,11 +104,21 @@ public class InformationHandler : MonoBehaviour
             RFIDInDatas.RemoveAt(0);
         }
 
-        if(emgStopDatas.Count > 0)
+        if (emgStopDatas.Count > 0)
         {
             EmgStopData emgStopData = emgStopDatas[0];
             machineInformation[emgStopData.interfaceToRead - 1].EmgStopPressed(emgStopData.pressed);
             emgStopDatas.RemoveAt(0);
+        }
+
+        if (roboBusyDatas.Count > 0)
+        {
+            if (!Robot.IsNull())
+            {
+                Robot.SetBool("Busy", roboBusyDatas.ElementAt(0));
+            }
+
+            roboBusyDatas.RemoveAt(0);
         }
     }
 }
