@@ -2,7 +2,7 @@
 [My Portfolio](https://scottmurphywales.wixsite.com/scott-murphy-portfol)
 [LinkedIn](https://www.linkedin.com/in/scott-murphy-506993216/)
 
-[<img src="https://img.youtube.com/vi/2zJ5u35rqm0/maxresdefault.jpg" alt="YouTube Thumbnail" width="512"/>](https://www.youtube.com/watch?v=2zJ5u35rqm0)
+[<img src="https://img.youtube.com/vi/pHdND9PrPF4/maxresdefault.jpg" alt="YouTube Thumbnail" width="512"/>](https://youtu.be/pHdND9PrPF4)
 
 ## Overview
 
