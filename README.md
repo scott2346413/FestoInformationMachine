@@ -40,10 +40,6 @@ To install and run the Festo Factory AR Application from Unity:
 6. **Build and Run:**
    Once your device is connected and has been selected in Unity build settings, build and run the project
 
-## Images
-
-IMAGES TO COME HERE
-
 ## Download
 
 You can download the Festo Factory AR Application from the following link:
