@@ -7,6 +7,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.UI;
+using System.ComponentModel;
 
 public class InformationHandler : MonoBehaviour
 {
@@ -18,6 +20,9 @@ public class InformationHandler : MonoBehaviour
     Dictionary<string, Transform> components = new Dictionary<string, Transform>();
 
     public Animator Robot;
+    public RobotArmInformation armInformation;
+
+    public Image IconImage;
 
     List<RFIDInData> RFIDInDatas = new List<RFIDInData>();
     List<EmgStopData> emgStopDatas = new List<EmgStopData>();
@@ -37,6 +42,10 @@ public class InformationHandler : MonoBehaviour
 
             case "RobotBusy":
                 RobotBusy(data);
+                break;
+
+            case "Icon":
+                Icon(data);
                 break;
         }
     }
@@ -66,8 +75,16 @@ public class InformationHandler : MonoBehaviour
 
     void RobotBusy(object data)
     {
-        bool busy = (bool)data;
+        Debug.Log("hello");
+        Debug.Log("IActStep " + Convert.ToInt16(data));
+        Int16Converter converter = new Int16Converter();
+        bool busy = Convert.ToInt16(data) == 130;
         roboBusyDatas.Add(busy);
+    }
+
+    void Icon(object data)
+    {
+        IconImage.sprite = data.ConvertTo<Sprite>();
     }
 
     private void Update()
@@ -113,10 +130,18 @@ public class InformationHandler : MonoBehaviour
 
         if (roboBusyDatas.Count > 0)
         {
+            Debug.Log("receiving robot busy data");
+
+            bool robotBusy = roboBusyDatas.ElementAt(0);
+
+            Debug.Log(robotBusy);
+
             if (!Robot.IsNull())
             {
-                Robot.SetBool("Busy", roboBusyDatas.ElementAt(0));
+                Robot.SetBool("Busy", robotBusy);
             }
+
+            armInformation.UpdateRobotBusy(robotBusy);
 
             roboBusyDatas.RemoveAt(0);
         }

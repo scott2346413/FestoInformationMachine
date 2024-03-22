@@ -12,18 +12,34 @@ public class OrdersManager : MonoBehaviour
     public Transform ordersParent;
     public GameObject orderInfo;
 
-    float slidingParentStartY;
+    public TextMeshProUGUI orderConfirmation;
+
+    public Toggle autoRefresh;
+    public TMP_Dropdown ordersDropdown;
+    public Button RefreshButton;
+    public string[] partIDs;
 
     private void Start()
     {
         Refresh();
     }
 
+    private void FixedUpdate()
+    {
+        RefreshButton.interactable = !autoRefresh.isOn;
+
+        if (autoRefresh.isOn)
+        {
+            Refresh();
+        }
+    }
+
     public void SendOrder()
     {
-        sendOrder.partNumber = "3003";
+        sendOrder.partNumber = partIDs[ordersDropdown.value];
         sendOrder.qty = "1";
         sendOrder.SendOrderToFactory();
+        orderConfirmation.text = sendOrder.newOrderMessage + "\n ------- \n Order should appear on Refresh shortly";
         Refresh();
         Debug.Log(sendOrder.newOrderMessage);
     }

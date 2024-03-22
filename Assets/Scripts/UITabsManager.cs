@@ -36,7 +36,7 @@ public class UITabsManager : MonoBehaviour
         }
         else if (!buttonOpen)
         {
-            buttons.DOMoveX(buttonsStartX + 300, 1f);
+            buttons.DOMoveX(buttonsStartX + 512, 1f);
         }
 
         for (int tabIndex = 0; tabIndex < tabs.Length; tabIndex++)
@@ -44,7 +44,7 @@ public class UITabsManager : MonoBehaviour
             if (tabIndex == tab && !opened)
             {
                 open[tabIndex] = true;
-                tabs[tabIndex].DOMoveX(startingX[tab] + 300, 1f);
+                tabs[tabIndex].DOMoveX(startingX[tab] + 512, 1f);
             }
             else
             {

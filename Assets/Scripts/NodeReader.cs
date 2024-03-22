@@ -45,6 +45,11 @@ public class NodeReader : MonoBehaviour
     // Method called when the monitored node changes its value
     public void NodeChanged(OPCUANodeSubscription sub, object value)
     {
+        if (nodeBeingMonitored == "RobotBusy")
+        {
+            Debug.Log("Interface Changed " + factoryMachineID);
+        }
+
         dataFromOPCUANode = value.ToString();
         infoHandler.updateInformation(factoryMachineID, nodeBeingMonitored, dataFromOPCUANode);
     }

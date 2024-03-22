@@ -22,10 +22,11 @@ public class ReminderPlacer : MonoBehaviour
         RectTransform machine = machines[dropdown.value];
         currentReminder = Instantiate(reminder, machine).transform;
         Debug.Log(currentReminder.gameObject == null);
+        string message = textInput.text + "\n \n - " + System.DateTime.Now.ToString();
 
         foreach (TextMeshProUGUI textMesh in currentReminder.GetComponentsInChildren<TextMeshProUGUI>())
         {
-            textMesh.text = textInput.text;
+            textMesh.text = message;
         }
 
         textInput.text = "";
